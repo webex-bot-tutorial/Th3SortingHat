@@ -1,5 +1,6 @@
 import os
 import config
+import dialog_flow
 import Webex_Teams as teams
 from flask import Flask, jsonify
 from flask import request
@@ -32,13 +33,13 @@ def bot_main():
     sessionid = 0
 
     ###Code that creates greeting message
-    if (str(spark_hook['name']) == 'WebMemberShipCreated') and (hook_data["personId"] == bot_id):
+    if (str(spark_hook['name']) == 'membership_webhook') and (hook_data["personId"] == bot_id):
 
-        generalAPIcommands.send_message(room_added, "Hello There! I've been added to a room!")
+        teams.send_message(room_added, "Hello There! I've been added to a room!")
 
-    elif ((str(spark_hook['name']) == 'WebMessagesSend') and (hook_data["personId"] != bot_id)):
+    elif ((str(spark_hook['name']) == 'messages_webhook') and (hook_data["personId"] != bot_id)):
 
-        input_text = mess_content = generalAPIcommands.get_message(hook_data['id'])
+        input_text = mess_content = teams.get_message(hook_data['id'])
 
         if (len(input_text) == 0):
             return ''
@@ -52,6 +53,8 @@ def bot_main():
         if (intent_name == "example"):
 
             teams.send_message(room_added, "Hello World!")
+
+            return ''
 
 if (__name__ == '__main__'):
     port = int(os.getenv('PORT', 8080))
