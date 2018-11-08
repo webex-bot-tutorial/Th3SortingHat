@@ -10,21 +10,21 @@ Use the package manager pip to install the following dependencies:
 * Requests
 * Ldap3
 
- ## app.py
+ ## App.py
 
  This is the file that you would run in order to start the app. Most of the interaction comes from two if/elif blocks. These are triggered depending on the name of the Webhook that is pinging the code. If the bot is added to the room, 'membership_webhook' should ping app.py. If someone talks to the bot, 'messages_webhook' should ping app.py. If you add any intents to the code, make sure that your always return '', else your ngrok will constantly give a 500 error.
 
-## dialog_flow.py
+## Dialog_flow.py
 
 Dialog_flow.py serves two functions: To start a conversation and to get the intent of a user during said conversation. The sessionId is generated based upon the id of the spark room that the conversation takes place in.
 
 make_dialog_call is the function that actually makes a call to dialog flow. It has the capacity to support multiple languages.
 
-## ldap.py
+## Ldap.py
 
 ldap.py is an example of how to query active directory via ldap. This file requires credentials in order to used and is meant for internal Cisco use.
 
-## update_webhooks.py
+## Update_webhooks.py
 
 update_webhooks.py is a file that makes updating webhooks a whole lot easier. In the main function, the names of the webhooks that are being used, as well as their corresponding id's need to be added in main().
 
